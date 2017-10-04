@@ -1,0 +1,22 @@
+﻿
+#rs-reservations-admin {
+  color: #dddddd;
+
+  #rs-datetimepicker {
+    color: black;
+    z-index: 1000;
+  }
+
+  .rs-total-price {
+    display: inline-block;
+    white-space: normal;
+    font-size: 1.1em;
+    line-height: inherit;
+  }
+
+  #rs-reservations-uptodate {
+    &.table-striped > tbody > tr:nth-of-type(odd) {
+      color: #171717;
+    }
+  }
+}

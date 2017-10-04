@@ -1,0 +1,105 @@
+﻿@using System.Globalization
+@using ReservationSystem.Controllers
+@using ReservationSystem.EnumTypes
+@using ReservationSystem.ViewModels.CalendarViewModels
+@model CalendarViewModel
+
+<div class="datepicker-calendar">
+  <div class="calendar-header">
+    <a asp-controller="@typeof(CalendarController).GetControllerName()" asp-action="@nameof(CalendarController.GetPreviousMonth)" asp-route-selectedyearmonth="@Model.SelectedYearMonth.Date.Ticks"
+       id="getPreviousMonth" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#rs-calendar-container">
+      <div class="getPreviousMonth">
+        <svg width="30" height="30">
+          <path fill="none" stroke="#0DAD83" stroke-width="3" d="M19,6 l-9,9 l9,9" />
+        </svg>
+      </div>
+    </a>
+
+    <div class="current-month-container">@Model.SelectedYearMonth.ToLocalTime().Year @Model.SelectedYearMonth.ToLocalTime().ToString("MMMM", CultureInfo.InvariantCulture)</div>
+
+    <a asp-controller="@typeof(CalendarController).GetControllerName()" asp-action="@nameof(CalendarController.GetNextMonth)" asp-route-selectedyearmonth="@Model.SelectedYearMonth.Date.Ticks"
+       id="getNextMonth" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#rs-calendar-container">
+      <div class="getNextMonth">
+        <svg width="30" height="30">
+          <path fill="none" stroke="#0DAD83" stroke-width="3" d="M11,6 l9,9 l-9,9" />
+        </svg>
+      </div>
+    </a>
+  </div>
+
+  <div class="calendar-day-header">
+    @for (int day = (int)DayNamesShortType.Mon; day <= (int)DayNamesShortType.Sun; day++)
+      {
+      <span class="day-label">@((DayNamesShortType)day)</span>
+    }
+  </div>
+
+  <div class="calendar-grid">
+    @{
+      var daysCount = DateTime.DaysInMonth(Model.SelectedYearMonth.ToLocalTime().Year, Model.SelectedYearMonth.ToLocalTime().Month);
+    }
+
+    @for (int day = 1; day <= daysCount; day++)
+    {
+      string noHover = (
+        (Model.SelectedYearMonth.ToLocalTime().Year <= Model.CurrentDate.ToLocalTime().Year &&
+        Model.SelectedYearMonth.ToLocalTime().Month < Model.CurrentDate.ToLocalTime().Month) ||
+        (Model.SelectedYearMonth.ToLocalTime().Year == Model.CurrentDate.ToLocalTime().Year &&
+        Model.SelectedYearMonth.ToLocalTime().Month == Model.CurrentDate.ToLocalTime().Month &&
+        day < Model.CurrentDate.ToLocalTime().Day) ||
+        (!Model.DaysForReservation.ContainsKey(new DateTime(Model.SelectedYearMonth.Year, Model.SelectedYearMonth.Month, day)))) ?
+        CssConstants.NoHover :
+        string.Empty;
+
+      double marginLeft = 0;
+
+      if (day == 1)
+      {
+        int dayOfWeek = (int)(new DateTime(Model.SelectedYearMonth.Year, Model.SelectedYearMonth.Month, day)).DayOfWeek;
+        int selectedDayOfWeek = dayOfWeek == 0 ? (int)DayNamesShortType.Sun : dayOfWeek;
+        marginLeft = (selectedDayOfWeek - 1) * CssConstants.DateContainerWidth;
+        string str = "";
+      }
+
+      string reservation = string.Empty;
+      DateTime CurrentDateKey = new DateTime(Model.SelectedYearMonth.Year, Model.SelectedYearMonth.Month, day);
+
+      if (Model.DaysForReservation.ContainsKey(CurrentDateKey))
+      {
+        ReservationOwnerType reservationOwnerType = Model.DaysForReservation[CurrentDateKey];
+
+        if (reservationOwnerType == ReservationOwnerType.User)
+        {
+          reservation = CssConstants.ReservationUser;
+        }
+
+        if (reservationOwnerType == ReservationOwnerType.OtherUser)
+        {
+          reservation = CssConstants.ReservationOther;
+        }
+      }
+
+      <div class="datecontainer @noHover" style="margin-left: @(marginLeft)%;">
+        <div class="datenumber @reservation" data-selected-date="@CurrentDateKey">
+          @day
+        </div>
+      </div>
+    }
+
+    <form id="rs-selected-date-hiden-form" class="hidden" asp-area=""
+          asp-controller="@typeof(CalendarController).GetControllerName()"
+          asp-action="@nameof(CalendarController.GetSelectedDateData)"
+          data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace"
+          data-ajax-update="#rs-selected-date-container">
+      <input name="date" id="rs-selected-date-hiden-date" />
+    </form>
+  </div>
+</div>
+@if (this.User.Identity.IsAuthenticated)
+{
+  <form id="rs-reservation-hiden-form" class="hidden" asp-area=""
+        asp-controller="@typeof(CalendarController).GetControllerName()"
+        asp-action="@nameof(CalendarController.ReservateTheDate)" method="post">
+    <input name="date" id="rs-reservation-hiden-date" />
+  </form>
+}

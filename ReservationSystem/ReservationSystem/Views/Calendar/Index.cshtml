@@ -1,0 +1,52 @@
+﻿@using ReservationSystem.ViewModels.CalendarViewModels
+@model DateTime
+
+@{
+  ViewData["Title"] = "Calendar";
+}
+
+@await Html.PartialAsync("_CalendarPartial", @Model.ToLocalTime())
+
+@section Scripts{
+  @await Html.PartialAsync("_ValidationScriptsPartial")
+
+  <script type="text/javascript">
+    $( function () {
+      $( '#rs-calendar #rs-calendar-container' ).click( function ( e ) {
+        e.preventDefault();
+        let $target = $( e.target );
+
+        // select date
+        if ( $target.hasClass( 'datenumber' ) &&
+          !$target.hasClass( '@CssConstants.ReservationUser' ) &&
+          !$target.hasClass( '@CssConstants.ReservationOther' ) &&
+          !$target.hasClass( '@CssConstants.DaySelected' ) &&
+          !$target.parent().hasClass( '@CssConstants.NoHover' ) ) {
+
+
+          $( '#rs-calendar .@CssConstants.DaySelected' ).removeClass( '@CssConstants.DaySelected' );
+
+          $target.addClass( '@CssConstants.DaySelected' );
+
+          let selectedDate = $target.data( 'selected-date' );
+          $( '#rs-selected-date-hiden-form #rs-selected-date-hiden-date' ).val( selectedDate );
+          $( "#rs-reservation-hiden-form #rs-reservation-hiden-date" ).val( selectedDate );
+          $( '#rs-selected-date-hiden-form' ).submit();
+        }
+      } );
+
+      // deselect date
+      $( '#rs-calendar #rs-calendar-cancel-button' ).click( function ( e ) {
+        $( '#rs-calendar .@CssConstants.DaySelected' ).removeClass( '@CssConstants.DaySelected' );
+        $( '#rs-selected-date-container .rs-selected-date' ).text( '' );
+        $( '#rs-selected-date-container .rs-selected-date-price' ).text( '' );
+      } );
+
+      // submit reservation
+      $( '#rs-calendar #rs-calendar-reserve-button' ).click( function ( e ) {
+        $( '#rs-reservation-hiden-form' ).submit();
+      } );
+
+    } );
+  </script>
+}

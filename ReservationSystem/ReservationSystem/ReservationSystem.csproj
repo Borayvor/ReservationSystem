@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>aspnet-ReservationSystem-7803DEEF-EAF5-4D07-8F45-ED5918A2732B</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\ReservationSystem.Common\ReservationSystem.Common.csproj" />
+    <ProjectReference Include="..\Data\ReservationSystem.Data.Common\ReservationSystem.Data.Common.csproj" />
+    <ProjectReference Include="..\Data\ReservationSystem.Data.Models\ReservationSystem.Data.Models.csproj" />
+    <ProjectReference Include="..\Data\ReservationSystem.Data\ReservationSystem.Data.csproj" />
+    <ProjectReference Include="..\Services\ReservationSystem.Services.Data\ReservationSystem.Services.Data.csproj" />
+    <ProjectReference Include="..\Services\ReservationSystem.Services.Web\ReservationSystem.Services.Web.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Settings.StyleCop">
+      <ExcludeFromSourceAnalysis>False</ExcludeFromSourceAnalysis>
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </None>
+  </ItemGroup>
+</Project>

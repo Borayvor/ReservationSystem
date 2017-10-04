@@ -1,0 +1,86 @@
+﻿@using ReservationSystem.Areas.Administration.Controllers
+@model ReservationsSetupViewModel
+
+@{
+  ViewData["Title"] = typeof(ReservationController).GetAreaName();
+}
+
+<div id="rs-reservations-admin">
+  <h1 class="text-center">Reservations</h1>
+  <hr />
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+      @Html.Partial("_AddReservationPartial", new ReservationAddViewModel())
+    </div>
+
+    <div class="col-sm-6 col-xs-12">
+      @Html.Partial("_RemoveReservationPartial", new ReservationRemoveViewModel(Model.ReservationsАvailable))
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label class="label label-info rs-total-price">Total price for all up to date reservations: @Model.PriceTotalAllUpToDate <span class="glyphicon glyphicon-euro"></span></label>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <label for="rs-reservations-uptodate">All up to date reservations:</label>
+      <table id="rs-reservations-uptodate" class="table table-responsive table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var reservation in Model.ReservationsAllUpToDate)
+          {
+            string owner = reservation.Owner == null ? string.Empty : reservation.Owner.UserName;
+
+            <tr>
+              <td>@reservation.DateOfReservation.ToLocalTime().ToShortDateString()</td>
+              <td>@reservation.Price <span class="glyphicon glyphicon-euro"></span></td>
+              <td>@owner</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+@{
+  var reservationDates = Model.ReservationsAllUpToDate.Select(x => x.DateOfReservation.ToLocalTime().ToString("MM/dd/yyyy HH:mm")).ToArray();
+
+  var reservationDatesString = string.Join(";", reservationDates);
+}
+
+@section Scripts {
+  @await Html.PartialAsync("_ValidationScriptsPartial")
+
+  <script type="text/javascript">
+
+    $( function () {
+
+      let dateReservations = [];
+
+      let datesString = "@(reservationDatesString)";
+
+      dateReservations = datesString.split( ";" );
+
+
+      $( '#rs-datetimepicker' ).datetimepicker( {
+        format: 'DD/MM/YYYY',
+        minDate: "@(DateTime.UtcNow.Date.ToLocalTime().ToString("MM/dd/yyyy HH:mm"))",
+        defaultDate: "@(DateTime.UtcNow.Date.ToLocalTime().ToString("MM/dd/yyyy HH:mm"))",
+        disabledDates: dateReservations
+      } );
+
+
+    } );
+  </script>
+
+}

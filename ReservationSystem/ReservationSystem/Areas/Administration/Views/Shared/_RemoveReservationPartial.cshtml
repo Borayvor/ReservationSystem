@@ -1,0 +1,17 @@
+﻿@using ReservationSystem.Areas.Administration.Controllers
+@model ReservationRemoveViewModel
+
+<form asp-area="@typeof(ReservationController).GetAreaName()" asp-controller="@typeof(ReservationController).GetControllerName()" asp-action="@(nameof(ReservationController.RemoveReservation))" method="post">
+  <div class="form-group">
+    <label asp-for="ReservationId">Remove available reservation:</label>
+    <select class="form-control" asp-for="ReservationId"
+            asp-items="@(new SelectList(Model.ReservationsАvailable,"Id", "DateOfReservation"))">
+      <option value="">Select one to remove</option>
+    </select>
+    <span asp-validation-for="ReservationId" class="text-danger"></span>
+  </div>
+  <input class="hidden" asp-for="ReservationsАvailable" />
+  <div class="form-group">
+    <button type="submit" class="btn btn-danger">Remove reservation</button>
+  </div>
+</form>

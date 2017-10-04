@@ -1,0 +1,26 @@
+﻿@using ReservationSystem.Areas.Administration.Controllers
+@model ReservationAddViewModel
+
+<form asp-area="@typeof(ReservationController).GetAreaName()" asp-controller="@typeof(ReservationController).GetControllerName()" asp-action="@(nameof(ReservationController.AddReservation))" method="post">
+  <div class="form-group">
+    <label for="rs-datetimepicker">Add reservation:</label>
+    <div class="input-group date" id="rs-datetimepicker">
+      <input type="text" class="form-control" asp-for="DateOfReservation" />
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+    <span asp-validation-for="DateOfReservation" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Price">Price:</label>
+    <div class="input-group">
+      <input asp-for="Price" class="form-control" />
+      <div class="input-group-addon"><span class="glyphicon glyphicon-euro"></span></div>
+    </div>
+    <span asp-validation-for="Price" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-success">Add reservation</button>
+  </div>
+</form>

@@ -1,0 +1,18 @@
+﻿@using System.Globalization
+@using ReservationSystem.ViewModels.CalendarViewModels
+@model SelectedDateDataViewModel
+
+<div class="datepicker-header">
+  <div class="datepicker-subheader">
+    <div class="row">
+      <div class="col-sm-3 col-xs-12">@GlobalConstants.CalendarSelectedDateMessage</div>
+
+      @if (Model.SelectedDate.HasValue)
+      {
+        <div class="col-sm-9 col-xs-12 rs-selected-date">@Model.SelectedDate.Value.ToLocalTime().DayOfWeek @Model.SelectedDate.Value.ToLocalTime().ToString("MMMM", CultureInfo.InvariantCulture) @Model.SelectedDate.Value.ToLocalTime().Day, @Model.SelectedDate.Value.ToLocalTime().Year</div>
+      }
+
+      <div class="col-xs-12">Price: <span class="rs-selected-date-price">@Model.Price</span> <span class="glyphicon glyphicon-euro"></span></div>
+    </div>
+  </div>
+</div>

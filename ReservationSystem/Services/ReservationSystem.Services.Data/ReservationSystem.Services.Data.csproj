@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\ReservationSystem.Common\ReservationSystem.Common.csproj" />
+    <ProjectReference Include="..\..\Data\ReservationSystem.Data.Common\ReservationSystem.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\ReservationSystem.Data.Models\ReservationSystem.Data.Models.csproj" />
+  </ItemGroup>
+</Project>
