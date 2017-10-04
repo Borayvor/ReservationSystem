@@ -59,7 +59,7 @@ namespace ReservationSystem.Controllers
         return this.View("Index", date);
       }
 
-      if (date.Date < DateTime.UtcNow.Date)
+      if (date.ToUniversalTime().Date < DateTime.UtcNow.Date)
       {
         return this.View("Index", date);
       }
