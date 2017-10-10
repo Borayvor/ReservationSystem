@@ -10,10 +10,9 @@ namespace ReservationSystem.Data
 {
   public class DataInitializer : IDataInitializer
   {
-    // This example just creates an Administrator role and one Admin users
     public async void Initialize(IApplicationBuilder app)
     {
-      const string randomUser = "user@user.com";
+      const string UserEmailString = "user@user.com";
 
       using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
       {
@@ -34,12 +33,10 @@ namespace ReservationSystem.Data
           var admin = new ApplicationUser { UserName = adminName, Email = adminName };
           await userManager.CreateAsync(admin, adminPassword);
 
-
           // Create random User account          
           string randomUserPassword = "user123";
-          var user = new ApplicationUser { UserName = randomUser, Email = randomUser };
+          var user = new ApplicationUser { UserName = UserEmailString, Email = UserEmailString };
           await userManager.CreateAsync(user, randomUserPassword);
-
 
           // Admin account apply the Administrator role
           await userManager.AddToRoleAsync(await userManager.FindByNameAsync(adminName), GlobalConstants.AdministratorRoleName);
@@ -49,31 +46,36 @@ namespace ReservationSystem.Data
 
         if (!context.Reservations.Any(x => x.DateOfReservation.Date >= DateTime.UtcNow.Date))
         {
-          var rndUser = await userManager.FindByNameAsync(randomUser);
+          var rndUser = await userManager.FindByNameAsync(UserEmailString);
 
           var reservations = new Reservation[]
           {
-            new Reservation {
+            new Reservation
+            {
               DateOfReservation = DateTime.UtcNow.AddDays(5).Date,
               Price = 34.56M,
               Owner = rndUser,
               OwnerId = rndUser.Id
             },
-             new Reservation {
+             new Reservation
+             {
               DateOfReservation = DateTime.UtcNow.AddDays(6).Date,
               Price = 34.56M
             },
-             new Reservation {
+             new Reservation
+             {
               DateOfReservation = DateTime.UtcNow.AddDays(7).Date,
               Price = 34.56M
             },
-             new Reservation {
+             new Reservation
+             {
               DateOfReservation = DateTime.UtcNow.AddDays(8).Date,
               Price = 34.56M,
               Owner = rndUser,
               OwnerId = rndUser.Id
             },
-             new Reservation {
+             new Reservation
+             {
               DateOfReservation = DateTime.UtcNow.AddDays(9).Date,
               Price = 34.56M,
               Owner = rndUser,
