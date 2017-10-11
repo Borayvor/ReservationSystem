@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="Moq" Version="4.7.137" />
+    <PackageReference Include="xunit" Version="2.3.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\ReservationSystem.Common\ReservationSystem.Common.csproj" />
+    <ProjectReference Include="..\..\Data\ReservationSystem.Data.Common\ReservationSystem.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\ReservationSystem.Data.Models\ReservationSystem.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\ReservationSystem.Data\ReservationSystem.Data.csproj" />
+    <ProjectReference Include="..\..\Services\ReservationSystem.Services.Data\ReservationSystem.Services.Data.csproj" />
+  </ItemGroup>
+
+</Project>

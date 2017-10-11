@@ -21,7 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReservationSystem.Common", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReservationSystem.Data.Common", "Data\ReservationSystem.Data.Common\ReservationSystem.Data.Common.csproj", "{558F2654-C1AC-4F88-AEDC-B813879774D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationSystem.Services.Data", "Services\ReservationSystem.Services.Data\ReservationSystem.Services.Data.csproj", "{ED1D6FD2-B32B-435D-99CB-3C98CB37CF4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReservationSystem.Services.Data", "Services\ReservationSystem.Services.Data\ReservationSystem.Services.Data.csproj", "{ED1D6FD2-B32B-435D-99CB-3C98CB37CF4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{013D8460-9C5B-4276-970F-224D6580BF69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservationSystem.Tests.UnitTests", "Tests\ReservationSystem.Tests.UnitTests\ReservationSystem.Tests.UnitTests.csproj", "{9C35D2DC-A7F6-4B59-AB17-20CC8E1961A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{ED1D6FD2-B32B-435D-99CB-3C98CB37CF4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED1D6FD2-B32B-435D-99CB-3C98CB37CF4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED1D6FD2-B32B-435D-99CB-3C98CB37CF4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C35D2DC-A7F6-4B59-AB17-20CC8E1961A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C35D2DC-A7F6-4B59-AB17-20CC8E1961A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C35D2DC-A7F6-4B59-AB17-20CC8E1961A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C35D2DC-A7F6-4B59-AB17-20CC8E1961A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +76,7 @@ Global
 		{6E4EDA49-95DA-45AB-ADE4-7FF81A5B362C} = {E1AED129-0CBE-4C1F-A7BB-37D0DE224D6A}
 		{558F2654-C1AC-4F88-AEDC-B813879774D1} = {892DD0B2-4EF8-4B38-AFBC-C65E310E2DCF}
 		{ED1D6FD2-B32B-435D-99CB-3C98CB37CF4E} = {CE8D585C-CDF5-4BA2-A438-C17AB0138B1F}
+		{9C35D2DC-A7F6-4B59-AB17-20CC8E1961A0} = {013D8460-9C5B-4276-970F-224D6580BF69}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98277589-144C-4317-8944-61283BDB3F91}

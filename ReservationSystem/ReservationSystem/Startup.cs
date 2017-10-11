@@ -45,8 +45,8 @@ namespace ReservationSystem
       // Add application services.
       services.AddScoped<IDataInitializer, DataInitializer>();
       services.AddScoped<DbContext, ApplicationDbContext>();
-      services.AddScoped(typeof(IReservationSystemEfRepository<>), typeof(ReservationSystemEfRepository<>));
-      services.AddScoped<IUnitOfWork, UnitOfWork>();
+      services.AddScoped(typeof(IEfDbRepository<>), typeof(EfDbRepository<>));
+      services.AddScoped<IEfUnitOfWork, EfUnitOfWork>();
       services.AddScoped<IReservationService, ReservationService>();
       services.AddTransient<IEmailSender, EmailSender>();
 

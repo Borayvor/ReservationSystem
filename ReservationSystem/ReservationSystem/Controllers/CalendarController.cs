@@ -13,14 +13,14 @@ namespace ReservationSystem.Controllers
   public class CalendarController : Controller
   {
     private readonly IMapper mapper;
-    private readonly IUnitOfWork unitOfWork;
+    private readonly IEfUnitOfWork unitOfWork;
     private readonly IReservationService reservationService;
 
-    public CalendarController(IMapper mapper, IUnitOfWork unitOfWork, IReservationService reservationService)
+    public CalendarController(IMapper mapper, IEfUnitOfWork unitOfWork, IReservationService reservationService)
     {
-      this.mapper = mapper;
-      this.unitOfWork = unitOfWork;
-      this.reservationService = reservationService;
+      this.mapper = mapper ?? throw new ArgumentNullException("mapper");
+      this.unitOfWork = unitOfWork ?? throw new ArgumentNullException("unitOfWork");
+      this.reservationService = reservationService ?? throw new ArgumentNullException("reservationService");
     }
 
     [HttpGet]
