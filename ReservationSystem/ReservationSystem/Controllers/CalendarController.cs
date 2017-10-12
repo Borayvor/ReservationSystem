@@ -56,19 +56,19 @@ namespace ReservationSystem.Controllers
     {
       if (!this.User.Identity.IsAuthenticated || this.User.IsInRole(GlobalConstants.AdministratorRoleName))
       {
-        return this.View("Index", date);
+        return this.View(nameof(CalendarController.Index), date);
       }
 
       if (date.ToUniversalTime().Date < DateTime.UtcNow.Date)
       {
-        return this.View("Index", date);
+        return this.View(nameof(CalendarController.Index), date);
       }
 
       var reservation = this.reservationService.GetByDate(date);
 
       if (!string.IsNullOrWhiteSpace(reservation.OwnerId))
       {
-        return this.View("Index", date);
+        return this.View(nameof(CalendarController.Index), date);
       }
 
       var userId = this.User.GetUserId();
@@ -77,7 +77,7 @@ namespace ReservationSystem.Controllers
       this.reservationService.Update(reservation);
       this.unitOfWork.SaveChanges();
 
-      return this.View("Index", date);
+      return this.View(nameof(CalendarController.Index), date);
     }
 
     [HttpPost]
