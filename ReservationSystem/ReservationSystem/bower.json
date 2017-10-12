@@ -7,7 +7,6 @@
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "eonasdan-bootstrap-datetimepicker": "v4.17.45",
-    "jquery-ajax-unobtrusive": "v3.2.4",
-    "kendo-ui": "kendo-ui-core#2017.3.927"
+    "jquery-ajax-unobtrusive": "v3.2.4"
   }
 }
