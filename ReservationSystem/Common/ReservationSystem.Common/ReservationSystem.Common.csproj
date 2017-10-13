@@ -2,9 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <DebugType>full</DebugType>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="coveralls.io" Version="1.4.2" />
-    <PackageReference Include="OpenCover" Version="4.6.519" />
-  </ItemGroup>
 </Project>
