@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-ReservationSystem-7803DEEF-EAF5-4D07-8F45-ED5918A2732B</UserSecretsId>
-
     <IsPackable>false</IsPackable>
+    <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.1.1" />

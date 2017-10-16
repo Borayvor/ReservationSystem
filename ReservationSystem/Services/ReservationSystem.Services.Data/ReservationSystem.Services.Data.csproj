@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Common\ReservationSystem.Common\ReservationSystem.Common.csproj" />
