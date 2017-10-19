@@ -15,7 +15,7 @@
       </div>
     </a>
 
-    <div class="current-month-container">@Model.SelectedYearMonth.ToLocalTime().Year @Model.SelectedYearMonth.ToLocalTime().ToString("MMMM", CultureInfo.InvariantCulture)</div>
+    <div class="current-month-container">@Model.SelectedYearMonth.Year @Model.SelectedYearMonth.ToString("MMMM", CultureInfo.InvariantCulture)</div>
 
     <a asp-controller="@typeof(CalendarController).GetControllerName()" asp-action="@nameof(CalendarController.GetNextMonth)" asp-route-selectedyearmonth="@Model.SelectedYearMonth.Date.Ticks"
        id="getNextMonth" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#rs-calendar-container">
@@ -36,16 +36,16 @@
 
   <div class="calendar-grid">
     @{
-      var daysCount = DateTime.DaysInMonth(Model.SelectedYearMonth.ToLocalTime().Year, Model.SelectedYearMonth.ToLocalTime().Month);
+      var daysCount = DateTime.DaysInMonth(Model.SelectedYearMonth.Year, Model.SelectedYearMonth.Month);
     }
 
     @for (int day = 1; day <= daysCount; day++)
     {
       string noHover = (
-        (Model.SelectedYearMonth.ToLocalTime().Year <= Model.CurrentDate.ToLocalTime().Year &&
-        Model.SelectedYearMonth.ToLocalTime().Month < Model.CurrentDate.ToLocalTime().Month) ||
-        (Model.SelectedYearMonth.ToLocalTime().Year == Model.CurrentDate.ToLocalTime().Year &&
-        Model.SelectedYearMonth.ToLocalTime().Month == Model.CurrentDate.ToLocalTime().Month &&
+        (Model.SelectedYearMonth.Year <= Model.CurrentDate.Year &&
+        Model.SelectedYearMonth.Month < Model.CurrentDate.Month) ||
+        (Model.SelectedYearMonth.Year == Model.CurrentDate.Year &&
+        Model.SelectedYearMonth.Month == Model.CurrentDate.Month &&
         day < Model.CurrentDate.ToLocalTime().Day) ||
         (!Model.DaysForReservation.ContainsKey(new DateTime(Model.SelectedYearMonth.Year, Model.SelectedYearMonth.Month, day)))) ?
         CssConstants.NoHover :
@@ -58,7 +58,6 @@
         int dayOfWeek = (int)(new DateTime(Model.SelectedYearMonth.Year, Model.SelectedYearMonth.Month, day)).DayOfWeek;
         int selectedDayOfWeek = dayOfWeek == 0 ? (int)DayNamesShortType.Sun : dayOfWeek;
         marginLeft = (selectedDayOfWeek - 1) * CssConstants.DateContainerWidth;
-        string str = "";
       }
 
       string reservation = string.Empty;

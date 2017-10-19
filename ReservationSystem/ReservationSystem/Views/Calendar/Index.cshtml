@@ -2,12 +2,18 @@
 
 @{
   ViewData["Title"] = "Calendar";
+  string _CalendarPartialString = "_CalendarPartial";
+  string _ValidationScriptsPartialString = "_ValidationScriptsPartial";
+
+  bool isAuthenticated = false;
+
+  isAuthenticated = this.User.Identity.IsAuthenticated;
 }
 
-@await Html.PartialAsync("_CalendarPartial", @Model.ToLocalTime())
+@await Html.PartialAsync(_CalendarPartialString, @Model.ToLocalTime())
 
 @section Scripts{
-  @await Html.PartialAsync("_ValidationScriptsPartial")
+  @await Html.PartialAsync(_ValidationScriptsPartialString)
 
   <script type="text/javascript">
     $( function () {
@@ -29,21 +35,33 @@
 
           let selectedDate = $target.data( 'selected-date' );
           $( '#rs-selected-date-hiden-form #rs-selected-date-hiden-date' ).val( selectedDate );
-          $( "#rs-reservation-hiden-form #rs-reservation-hiden-date" ).val( selectedDate );
+          $( '#rs-reservation-hiden-form #rs-reservation-hiden-date' ).val( selectedDate );
+
+          if ( '@isAuthenticated'.toLowerCase() === 'true' ) {
+            $( '#rs-calendar #rs-calendar-reserve-button' ).removeClass( 'disabled' );
+          }
+
           $( '#rs-selected-date-hiden-form' ).submit();
-        }
+          }
       } );
 
       // deselect date
       $( '#rs-calendar #rs-calendar-cancel-button' ).click( function ( e ) {
         $( '#rs-calendar .@CssConstants.DaySelected' ).removeClass( '@CssConstants.DaySelected' );
+
+        if ( '@isAuthenticated'.toLowerCase() === 'true' ) {
+          $( '#rs-calendar #rs-calendar-reserve-button' ).addClass( 'disabled' );
+        }
+
         $( '#rs-selected-date-container .rs-selected-date' ).text( '' );
         $( '#rs-selected-date-container .rs-selected-date-price' ).text( '' );
       } );
 
       // submit reservation
       $( '#rs-calendar #rs-calendar-reserve-button' ).click( function ( e ) {
-        $( '#rs-reservation-hiden-form' ).submit();
+        if ( '@isAuthenticated'.toLowerCase() === 'true' ) {
+          $( '#rs-reservation-hiden-form' ).submit();
+        }
       } );
 
     } );

@@ -13,16 +13,12 @@
 }
 
 .rs-calendar-cancel-button,
-.rs-calendar-reserve-button {
-  float: left;
+.rs-calendar-reserve-button { 
   height: 40px;
   line-height: 40px;
-  padding: 0 15px;
-  border-radius: 5px;
+  padding: 0 15px;  
   margin-left: 15px;
-  margin-top: 20px;
-  cursor: pointer;
-  transition: all 0.15s ease;
+  margin-top: 20px;  
 }
 
 .rs-calendar-cancel-button {

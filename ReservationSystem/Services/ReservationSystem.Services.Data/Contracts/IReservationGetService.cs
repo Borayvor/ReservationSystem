@@ -20,8 +20,15 @@ namespace ReservationSystem.Services.Data.Contracts
     /// <summary>
     /// Get <"T"> entity.
     /// </summary>
-    /// <param name="date"></param>
+    /// <param name="date">Reservation date.</param>
     /// <returns> Return <"T"> with date <"date">.</returns>
     T GetByDate(DateTime date);
+
+    /// <summary>
+    /// Get <"T"> entity.
+    /// </summary>
+    /// <param name="date">Reservation date.</param>
+    /// <returns> Return active <"T"> with date <"date">.</returns>
+    T GetActiveByDate(DateTime date);
   }
 }

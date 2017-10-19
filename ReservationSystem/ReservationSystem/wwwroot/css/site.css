@@ -38,15 +38,11 @@ body {
       margin: auto; }
     body .container .rs-calendar-cancel-button,
     body .container .rs-calendar-reserve-button {
-      float: left;
       height: 40px;
       line-height: 40px;
       padding: 0 15px;
-      border-radius: 5px;
       margin-left: 15px;
-      margin-top: 20px;
-      cursor: pointer;
-      transition: all 0.15s ease; }
+      margin-top: 20px; }
     body .container .rs-calendar-cancel-button {
       border: 1px solid #0DAD83;
       background: white;

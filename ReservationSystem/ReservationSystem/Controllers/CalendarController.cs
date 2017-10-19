@@ -59,12 +59,12 @@ namespace ReservationSystem.Controllers
         return this.View(nameof(CalendarController.Index), date);
       }
 
-      if (date.ToUniversalTime().Date < DateTime.UtcNow.Date)
+      if (date < DateTime.UtcNow.Date)
       {
-        return this.View(nameof(CalendarController.Index), date);
+        return this.View(nameof(CalendarController.Index), DateTime.UtcNow.Date);
       }
 
-      var reservation = this.reservationService.GetByDate(date);
+      var reservation = this.reservationService.GetActiveByDate(date);
 
       if (!string.IsNullOrWhiteSpace(reservation.OwnerId))
       {
@@ -84,7 +84,7 @@ namespace ReservationSystem.Controllers
     [ValidateAntiForgeryToken]
     public IActionResult GetSelectedDateData(DateTime date)
     {
-      var reservation = this.reservationService.GetByDate(date);
+      var reservation = this.reservationService.GetActiveByDate(date);
 
       var newModel = this.mapper.Map<SelectedDateDataViewModel>(reservation);
 

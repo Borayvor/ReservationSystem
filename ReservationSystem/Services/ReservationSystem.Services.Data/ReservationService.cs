@@ -42,12 +42,26 @@ namespace ReservationSystem.Services.Data
 
     public Reservation GetById(Guid id)
     {
+      if (id == Guid.Empty)
+      {
+        throw new ArgumentException("Empty Guid Id.");
+      }
+
       var result = this.reservations.GetById(id);
 
       return result;
     }
 
     public Reservation GetByDate(DateTime date)
+    {
+      var result = this.reservations
+        .GetAll()
+        .FirstOrDefault(x => x.DateOfReservation.Date == date.Date);
+
+      return result;
+    }
+
+    public Reservation GetActiveByDate(DateTime date)
     {
       if (date.Date < DateTime.UtcNow.Date)
       {
@@ -56,6 +70,7 @@ namespace ReservationSystem.Services.Data
 
       var result = this.reservations
         .GetAll()
+        .Where(x => x.DateOfReservation.Date >= DateTime.UtcNow.Date)
         .FirstOrDefault(x => x.DateOfReservation.Date == date.Date);
 
       return result;

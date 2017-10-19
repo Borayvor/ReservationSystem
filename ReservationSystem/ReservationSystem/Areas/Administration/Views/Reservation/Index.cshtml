@@ -3,6 +3,9 @@
 
 @{
   ViewData["Title"] = typeof(ReservationController).GetAreaName();
+  string _AddReservationPartialString = "_AddReservationPartial";
+  string _RemoveReservationPartialString = "_RemoveReservationPartial";
+  string _ValidationScriptsPartialString = "_ValidationScriptsPartial";
 }
 
 <div id="rs-reservations-admin">
@@ -10,11 +13,11 @@
   <hr />
   <div class="row">
     <div class="col-sm-6 col-xs-12">
-      @Html.Partial("_AddReservationPartial", new ReservationAddViewModel())
+      @Html.Partial(_AddReservationPartialString, new ReservationAddViewModel())
     </div>
 
     <div class="col-sm-6 col-xs-12">
-      @Html.Partial("_RemoveReservationPartial", new ReservationRemoveViewModel(Model.ReservationsАvailable))
+      @Html.Partial(_RemoveReservationPartialString, new ReservationRemoveViewModel(Model.ReservationsАvailable))
     </div>
   </div>
 
@@ -59,7 +62,7 @@
 }
 
 @section Scripts {
-  @await Html.PartialAsync("_ValidationScriptsPartial")
+  @await Html.PartialAsync(_ValidationScriptsPartialString)
 
   <script type="text/javascript">
 
@@ -74,8 +77,8 @@
 
       $( '#rs-datetimepicker' ).datetimepicker( {
         format: 'DD/MM/YYYY',
-        minDate: "@(DateTime.UtcNow.Date.ToLocalTime().ToString("MM/dd/yyyy HH:mm"))",
-        defaultDate: "@(DateTime.UtcNow.Date.ToLocalTime().ToString("MM/dd/yyyy HH:mm"))",
+        minDate: "@(DateTime.Now.Date.ToString("MM/dd/yyyy HH:mm"))",
+        defaultDate: "@(DateTime.Now.Date.ToString("MM/dd/yyyy HH:mm"))",
         disabledDates: dateReservations
       } );
 

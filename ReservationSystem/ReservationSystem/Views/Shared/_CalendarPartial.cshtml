@@ -14,8 +14,8 @@
       @await Component.InvokeAsync(typeof(SelectedDateDataViewComponent), new { viewModel = new SelectedDateDataViewModel() })
     </div>
     <div class="buttons-container">
-      <div id="rs-calendar-cancel-button" class="rs-calendar-cancel-button">Cancel</div>
-      <div id="rs-calendar-reserve-button" class="rs-calendar-reserve-button">Reserve</div>
+      <button id="rs-calendar-cancel-button" class="btn rs-calendar-cancel-button">Cancel</button>
+      <button id="rs-calendar-reserve-button" class="btn rs-calendar-reserve-button disabled">Reserve</button>
     </div>
   </div>
 </div>
