@@ -44,7 +44,7 @@ namespace ReservationSystem.Services.Data
     {
       if (id == Guid.Empty)
       {
-        throw new ArgumentException("Empty Guid Id.");
+        throw new ArgumentException("Id must not be empty Guid !");
       }
 
       var result = this.reservations.GetById(id);
@@ -80,7 +80,12 @@ namespace ReservationSystem.Services.Data
     {
       if (entity == null)
       {
-        throw new ArgumentNullException("entity");
+        throw new ArgumentNullException("Entity must not be null !");
+      }
+
+      if (entity.DateOfReservation.Date < DateTime.UtcNow.Date)
+      {
+        throw new ArgumentNullException("Entity DateOfReservation must be valid !");
       }
 
       this.reservations.Create(entity);
@@ -90,7 +95,7 @@ namespace ReservationSystem.Services.Data
     {
       if (entity == null)
       {
-        throw new ArgumentNullException("entity");
+        throw new ArgumentNullException("Entity must not be null !");
       }
 
       this.reservations.Update(entity);
@@ -100,7 +105,7 @@ namespace ReservationSystem.Services.Data
     {
       if (entity == null)
       {
-        throw new ArgumentNullException("entity");
+        throw new ArgumentNullException("Entity must not be null !");
       }
 
       this.reservations.Delete(entity);
