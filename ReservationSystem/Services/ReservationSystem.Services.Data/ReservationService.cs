@@ -44,7 +44,7 @@ namespace ReservationSystem.Services.Data
     {
       if (id == Guid.Empty)
       {
-        throw new ArgumentException("Id must not be empty Guid !");
+        throw new ArgumentException(GlobalConstants.GetById_GuidEmpty_ExceptionMessage);
       }
 
       var result = this.reservations.GetById(id);
@@ -65,7 +65,8 @@ namespace ReservationSystem.Services.Data
     {
       if (date.Date < DateTime.UtcNow.Date)
       {
-        throw new ArgumentOutOfRangeException("You can not get reservation before the current date !");
+        throw new ArgumentOutOfRangeException(
+          GlobalConstants.ReservationService_GetActiveByDate_ActiveDate_ExceptionMessage);
       }
 
       var result = this.reservations
@@ -80,12 +81,12 @@ namespace ReservationSystem.Services.Data
     {
       if (entity == null)
       {
-        throw new ArgumentNullException("Entity must not be null !");
+        throw new ArgumentNullException(GlobalConstants.Reservation_Required_ExceptionMessage);
       }
 
       if (entity.DateOfReservation.Date < DateTime.UtcNow.Date)
       {
-        throw new ArgumentNullException("Entity DateOfReservation must be valid !");
+        throw new ArgumentNullException(GlobalConstants.ReservationService_Create__ActiveDate_ExceptionMessage);
       }
 
       this.reservations.Create(entity);
@@ -95,7 +96,7 @@ namespace ReservationSystem.Services.Data
     {
       if (entity == null)
       {
-        throw new ArgumentNullException("Entity must not be null !");
+        throw new ArgumentNullException(GlobalConstants.Reservation_Required_ExceptionMessage);
       }
 
       this.reservations.Update(entity);
@@ -105,7 +106,7 @@ namespace ReservationSystem.Services.Data
     {
       if (entity == null)
       {
-        throw new ArgumentNullException("Entity must not be null !");
+        throw new ArgumentNullException(GlobalConstants.Reservation_Required_ExceptionMessage);
       }
 
       this.reservations.Delete(entity);

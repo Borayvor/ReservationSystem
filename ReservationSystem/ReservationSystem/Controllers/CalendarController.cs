@@ -18,9 +18,12 @@ namespace ReservationSystem.Controllers
 
     public CalendarController(IMapper mapper, IEfUnitOfWork unitOfWork, IReservationService reservationService)
     {
-      this.mapper = mapper ?? throw new ArgumentNullException("mapper");
-      this.unitOfWork = unitOfWork ?? throw new ArgumentNullException("unitOfWork");
-      this.reservationService = reservationService ?? throw new ArgumentNullException("reservationService");
+      this.mapper = mapper ?? throw new ArgumentNullException(
+        GlobalConstants.AutoMapper_Required_ExceptionMessage);
+      this.unitOfWork = unitOfWork ?? throw new ArgumentNullException(
+        GlobalConstants.UnitOfWork_Required_ExceptionMessage);
+      this.reservationService = reservationService ?? throw new ArgumentNullException(
+        GlobalConstants.ReservationService_Required_ExceptionMessage);
     }
 
     [HttpGet]
