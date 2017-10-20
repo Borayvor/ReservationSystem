@@ -15,7 +15,7 @@ namespace ReservationSystem.Tests.UnitTests.Services.ReservationServiceTests
     {
       // Arange, Act & Assert
       Assert.Throws<ArgumentNullException>(
-        GlobalConstants.EfDbRepositoryOfReservation_Required_ExceptionMessage,
+        GlobalConstants.EfDbRepositoryOfReservationRequiredExceptionMessage,
         () => new ReservationService(null));
     }
 

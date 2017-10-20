@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Moq;
 using ReservationSystem.Data.Common.Repositories;
@@ -8,7 +9,7 @@ using Xunit;
 
 namespace ReservationSystem.Tests.UnitTests.Services.ReservationServiceTests
 {
-  public class GetAll_Should
+  public class GetAllUpToDate_Should
   {
     [Fact]
     public void CallEfDbRepository_GetAll_Method_Once()
@@ -19,7 +20,7 @@ namespace ReservationSystem.Tests.UnitTests.Services.ReservationServiceTests
       var service = new ReservationService(mockedIEfDbRepository.Object);
 
       // Act
-      service.GetAll();
+      service.GetAllUpToDate();
 
       // Assert
       mockedIEfDbRepository.Verify(x => x.GetAll(), Times.Once);
@@ -29,13 +30,28 @@ namespace ReservationSystem.Tests.UnitTests.Services.ReservationServiceTests
     public void ReturnProperlyResult_When_ReservationList_IsNotEmpty()
     {
       // Arange         
-      var mockedEntityFirst = new Mock<Reservation>();
-      var mockedEntitySecond = new Mock<Reservation>();
+      var mockedEntityFirst = new Reservation
+      {
+        DateOfReservation = DateTime.UtcNow.Date.AddDays(1),
+        Id = Guid.Empty,
+        Owner = new Mock<ApplicationUser>().Object,
+        OwnerId = string.Empty,
+        Price = 0
+      };
+
+      var mockedEntitySecond = new Reservation
+      {
+        DateOfReservation = DateTime.UtcNow.Date.AddDays(-1),
+        Id = Guid.Empty,
+        Owner = new Mock<ApplicationUser>().Object,
+        OwnerId = string.Empty,
+        Price = 0
+      };
 
       var entityList = new List<Reservation>
       {
-        mockedEntityFirst.Object,
-        mockedEntitySecond.Object
+        mockedEntityFirst,
+        mockedEntitySecond
       };
 
       var mockedIEfDbRepository = new Mock<IEfDbRepository<Reservation>>();
@@ -44,11 +60,11 @@ namespace ReservationSystem.Tests.UnitTests.Services.ReservationServiceTests
       var service = new ReservationService(mockedIEfDbRepository.Object);
 
       // Act
-      var actual = service.GetAll().ToList();
+      var actual = service.GetAllUpToDate().ToList();
 
       // Assert
-      Assert.Contains(mockedEntityFirst.Object, actual);
-      Assert.Contains(mockedEntitySecond.Object, actual);
+      Assert.Contains(mockedEntityFirst, actual);
+      Assert.DoesNotContain(mockedEntitySecond, actual);
     }
   }
 }

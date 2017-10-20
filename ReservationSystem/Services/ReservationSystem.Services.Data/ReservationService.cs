@@ -16,7 +16,7 @@ namespace ReservationSystem.Services.Data
     {
       this.reservations = reservations ??
         throw new ArgumentNullException(
-          GlobalConstants.EfDbRepositoryOfReservation_Required_ExceptionMessage);
+          GlobalConstants.EfDbRepositoryOfReservationRequiredExceptionMessage);
     }
 
     public IQueryable<Reservation> GetAll()
@@ -44,7 +44,7 @@ namespace ReservationSystem.Services.Data
     {
       if (id == Guid.Empty)
       {
-        throw new ArgumentException(GlobalConstants.GetById_GuidEmpty_ExceptionMessage);
+        throw new ArgumentException(GlobalConstants.GetByIdGuidEmptyExceptionMessage);
       }
 
       var result = this.reservations.GetById(id);
@@ -66,7 +66,7 @@ namespace ReservationSystem.Services.Data
       if (date.Date < DateTime.UtcNow.Date)
       {
         throw new ArgumentOutOfRangeException(
-          GlobalConstants.ReservationService_GetActiveByDate_ActiveDate_ExceptionMessage);
+          GlobalConstants.ReservationServiceGetActiveByDateActiveDateExceptionMessage);
       }
 
       var result = this.reservations
@@ -81,12 +81,12 @@ namespace ReservationSystem.Services.Data
     {
       if (entity == null)
       {
-        throw new ArgumentNullException(GlobalConstants.Reservation_Required_ExceptionMessage);
+        throw new ArgumentNullException(GlobalConstants.ReservationRequiredExceptionMessage);
       }
 
       if (entity.DateOfReservation.Date < DateTime.UtcNow.Date)
       {
-        throw new ArgumentNullException(GlobalConstants.ReservationService_Create__ActiveDate_ExceptionMessage);
+        throw new ArgumentNullException(GlobalConstants.ReservationServiceCreateActiveDateExceptionMessage);
       }
 
       this.reservations.Create(entity);
@@ -96,7 +96,7 @@ namespace ReservationSystem.Services.Data
     {
       if (entity == null)
       {
-        throw new ArgumentNullException(GlobalConstants.Reservation_Required_ExceptionMessage);
+        throw new ArgumentNullException(GlobalConstants.ReservationRequiredExceptionMessage);
       }
 
       this.reservations.Update(entity);
@@ -106,7 +106,7 @@ namespace ReservationSystem.Services.Data
     {
       if (entity == null)
       {
-        throw new ArgumentNullException(GlobalConstants.Reservation_Required_ExceptionMessage);
+        throw new ArgumentNullException(GlobalConstants.ReservationRequiredExceptionMessage);
       }
 
       this.reservations.Delete(entity);
